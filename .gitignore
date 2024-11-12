@@ -1,0 +1,42 @@
+# .gitignore
+
+# Ignore Maven or Gradle build files and directories (for Spring Boot)
+**/target/
+**/out/
+*.log
+**/build/
+*.iml
+*.iws
+.gradle/
+.idea/
+*.class
+
+# Ignore compiled files (Java and Kotlin)
+**/*.class
+**/*.jar
+**/*.war
+**/*.ear
+
+# Ignore application-specific files (for Spring Boot)
+**/*.db
+**/hs_err_pid*
+
+# Ignore FastAPI-specific directories and files (Python)
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/.pytest_cache/
+**/instance/
+**/.mypy_cache/
+**/htmlcov/
+**/.coverage
+
+# Ignore virtual environments
+**/venv/
+**/.venv/
+**/env/
+**/.env/
+
+# Ignore any VS Code workspace and settings files
+.vscode/
+.DS_Store

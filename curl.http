@@ -1,0 +1,52 @@
+@hostname = localhost
+@port = 8080
+@server = {{hostname}}:{{port}}
+@realm = my-realm
+
+@client_id_app1 = client-app-1
+@client_secret_app1 = client-secret-1
+
+@client_id_app2 = client-app-2
+@client_secret_app2 = client-secret-2
+
+
+// @prompt access_token
+// @prompt refresh_token
+
+###
+GET http://{{server}}/
+Content-Type: application/json
+
+
+### openid-configuration
+GET http://{{server}}/realms/{{realm}}/.well-known/openid-configuration
+Content-Type: application/json
+
+
+### Get access token
+# @name login
+POST http://{{server}}/realms/{{realm}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+username=user1&password=123&client_id={{client_id_app1}}&client_secret={{client_secret_app1}}&grant_type=password&scope=openid
+
+
+### Use access token in authorization header
+@token_type = {{login.response.body.$.token_type}}
+@access_token = {{login.response.body.$.access_token}}
+GET http://{{server}}/realms/{{realm}}/protocol/openid-connect/userinfo
+Content-Type: application/json
+Authorization: {{token_type}} {{access_token}}
+
+
+###
+GET http://localhost:8081/api/hello
+Content-Type: application/json
+
+###
+@token_type = {{login.response.body.$.token_type}}
+@access_token = {{login.response.body.$.access_token}}
+GET http://localhost:8081/message
+Content-Type: application/json
+Authorization: {{token_type}} {{access_token}}
+

@@ -1,0 +1,98 @@
+{
+  "id": "0ca41d6f-f2cb-4e15-aa28-479cee06c6aa",
+  "realm": "my-realm",
+  "enabled": true,
+  "users": [
+    {
+      "username": "admin",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "admin@example.com",
+      "firstName": "Admin",
+      "lastName": "User",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "admin",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["admin"]
+    },
+    {
+      "username": "user1",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "user1@example.com",
+      "firstName": "User",
+      "lastName": "One",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["user"]
+    },
+    {
+      "username": "user2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "user2@example.com",
+      "firstName": "User",
+      "lastName": "Two",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["user"]
+    }
+  ],
+  "roles": {
+    "realm": [
+      {
+        "name": "admin",
+        "description": "Administrative privileges for managing the realm",
+        "composite": true,
+        "composites": {
+          "client": {
+            "realm-management": ["manage-users", "manage-clients", "view-realm", "manage-realm"]
+          }
+        }
+      },
+      {
+        "name": "user",
+        "description": "Basic user privileges for general access",
+        "composite": false
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "client-app-1",
+      "name": "Client Application 1",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "directAccessGrantsEnabled": true,
+      "publicClient": false,
+      "secret": "client-secret-1",
+      "redirectUris": ["http://localhost:8081/*"],
+      "webOrigins": ["http://localhost:8081"]
+    },
+    {
+      "clientId": "client-app-2",
+      "name": "Client Application 2",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "directAccessGrantsEnabled": true,
+      "publicClient": false,
+      "secret": "client-secret-2",
+      "redirectUris": ["http://localhost:8082/*"],
+      "webOrigins": ["http://localhost:8082"]
+    }
+  ]
+}
